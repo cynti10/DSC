@@ -1,0 +1,85 @@
+#include<stdio.h>
+#include<stdlib.h>
+typedef struct node{
+        int data;
+        struct node *left;
+        struct node *right;
+}node;
+node *root=NULL;
+node *newnode(int data)
+{
+        node *nn=(node *)malloc(sizeof(node));
+        nn->data=data;
+        nn->left=nn->right=NULL;
+        return nn;
+}
+node *insert(node *n,int data)
+{
+        if(n==NULL)
+                return newnode(data);
+        if(data<n->data)
+                n->left=insert(n->left,data);
+        else
+                n->right=insert(n->right,data);
+        return n;
+}
+void inorder(node *root)
+{
+        if(root!=NULL)
+        {
+                inorder(root->left);
+                printf("%d ",root->data);
+                inorder(root->right);
+        }
+}
+void preorder(node *root)
+{
+        if(root!=NULL)
+        {
+                printf("%d ",root->data);
+                preorder(root->left);
+                preorder(root->right);
+        }
+}
+void postorder(node *root)
+{
+        if(root!=NULL)
+        {
+                postorder(root->left);
+                postorder(root->right);
+                printf("%d ",root->data);
+        }
+}
+int main()
+{
+        int c,val;
+        while(1)
+        {
+                printf("\n1.Insert\n2.Inorder\n3.Preorder\n4.Postorder\n5.Exit\nEnter your choice: ");
+                scanf("%d",&c);
+                switch(c)
+                {
+                        case 1:
+                                printf("Enter data: ");
+                                scanf("%d",&val);
+                                root=insert(root,val);
+                                break;
+                        case 2:
+                                printf("Inorder: ");
+                                inorder(root);
+                                break;
+                        case 3:
+                                printf("Preorder: ");
+                                preorder(root);
+                                break;
+                        case 4:
+                                printf("Postoder: ");
+                                postorder(root);
+                                break;
+                        case 5: exit(0);
+                        default:
+                                printf("Invalid choice\n");
+                }
+        }
+        return 0;
+}

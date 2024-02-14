@@ -1,0 +1,86 @@
+#include<stdio.h>
+#include<stdlib.h>
+typedef struct node{
+        int data;
+        struct node *next;
+}node;
+node *top=NULL;
+void push(int item)
+{
+        node *temp=(node *)malloc(sizeof(node));
+        temp->data=item;
+        temp->next=top;
+        top=temp;
+}
+int pop()
+{
+        if(top==NULL)
+        {
+                printf("Stack is empty\n");
+                return -1;
+        }
+        node *temp=top;
+        top=top->next;
+        int item=temp->data;
+        free (temp);
+        return item;
+}
+int peek()
+{
+        if (top==NULL)
+        {
+                printf("Stack is empty\n");
+                return -1;
+        }
+        return top->data;
+}
+void display()
+{
+        if (top==NULL)
+        {
+                printf("Stack is empty\n");
+                return;
+        }
+        node *temp=top;
+        printf("Stack: ");
+        while (temp!=NULL)
+        {
+                printf("%d\n",temp->data);
+                temp=temp->next;
+        }
+}
+int main()
+{
+        int c,item;
+        while(1)
+        {
+                printf("\n1.Push\n2.Pop\n3.Peek\n4.Display\n5.Quit\nEnter your choice: ");
+                scanf("%d",&c);
+                switch(c)
+                {
+                        case 1:
+                                printf("Enter push item: ");
+                                scanf("%d",&item);
+                                push(item);
+                                break;
+                        case 2:
+                                item=pop();
+                                if (item!=-1)
+                                        printf("Popped item: %d",item);
+                                break;
+                        case 3:
+                                item=peek();
+                                if (item!=-1)
+                                        printf("Top item: %d",item);
+                                break;
+                        case 4:
+                                display();
+                                break;
+                        case 5:
+                                exit(0);
+                        default:
+                                printf("Invalid choice\n");
+                }
+        }
+        return 0;
+}

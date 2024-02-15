@@ -10,7 +10,7 @@ node *start=NULL;
 void insert(char *name)
 {
     node *nn=(node *)malloc(sizeof(node));
-    nn->data=name;
+    strcat(nn->data,name);
     nn->next=NULL;
     if(start==NULL||strcmp(start->data,name)>=0)
     {
@@ -22,7 +22,7 @@ void insert(char *name)
         node *cur=start,*prev=NULL;
         while(cur!=NULL)
         {
-            if(strcmp(cur->data,name>=0))
+            if(strcmp(cur->data,name)>=0)
             {
                 nn->next=cur;
                 prev->next=nn;
@@ -47,7 +47,7 @@ void delete(char *name)
         node *prev=NULL;
         while(temp!=NULL)
         {
-            if(strcmp(temp->data,name==0))
+            if(strcmp(temp->data,name)==0)
             {
                 prev->next=temp->next;
                 free(temp);
@@ -76,6 +76,28 @@ void main()
     while(1)
     {
         printf("\n1.Insert\n2.Delete\n3.Display\n4.Exit\nEnter your choice: ");
+		scanf("%d",&ch);
+		switch(ch)
+		{
+			case 1:
+			printf("Enter name to entered: ");
+			scanf("%s",name);
+			insert(name);
+			break;
+			case 2:
+			printf("Enter name to be deleted: ");
+			scanf("%s",name);
+			delete(name);
+			break;
+			case 3:
+			display();
+			break;
+			case 4:
+			exit(0);
+			default:
+			printf("Inavalid choice\n");
+		}
+			
         
     }
     

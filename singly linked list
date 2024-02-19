@@ -35,31 +35,28 @@ void insert(char *name)
 }
 void delete(char *name)
 {
-    node *temp=start;
+    node *temp=start,prev=NULL;
     if(temp!=NULL||strcmp(temp->data,name)==0)
     {
         start=temp->next;
         free(temp);
         return;
     }
+    while(temp!=NULL&&strcmp(temp->data,name!=0)
+    {
+        prev=temp;
+        temp=temp->next;
+    }    
+    if(temp==NULL)
+        printf("Key not found\n");
     else
     {
-        node *prev=NULL;
-        while(temp!=NULL)
-        {
-            if(strcmp(temp->data,name)==0)
-            {
-                prev->next=temp->next;
-                free(temp);
-                break;
-            }
-            
-            prev->next=temp;
-            temp=temp->next;
-        }
-        printf("Name not found\n");
+        prev->next=temp->next;
+        free(temp);
     }
+        
 }
+
 void display()
 {
     node *temp=start;

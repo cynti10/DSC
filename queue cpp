@@ -1,0 +1,78 @@
+#include<iostream>
+#include<string>
+#define MAX 5
+using namespace std;
+class Queue
+{
+    private:
+    int arr[MAX];
+    int front,rear;
+    public:
+    Queue()
+    {
+        front=rear=-1;
+    }
+    void enqueue(int val)
+    {
+        if(rear==MAX-1)
+        {
+            cout<<"Overflow\n";
+            return;
+        }
+        if(front==-1)
+        front=0;
+        arr[++rear]=val;
+    }
+    void dequeue()
+    {
+        if(front==-1)
+        {
+            cout<<"Underflow\n";
+            return;
+        }
+        cout<<"Deleted element: "<<arr[front++]<<endl;
+        if(front==rear)
+        front=rear=-1;
+    }
+    void display()
+    {
+        if(front==-1)
+        {
+            cout<<"Empty Queue\n";
+            return;
+        }
+        int i;
+        for(i=front;i<=rear;i++)
+        {
+            cout<<arr[i]<<"\t";
+        }
+        cout<<endl;
+    }
+};
+int main()
+{
+    Queue q1;
+    int c,val;
+    while(1)
+    {
+        cout<<"Enter choice: ";
+        cin>>c;
+        switch(c)
+        {
+            case 1:
+            cout<<"Enter element to be inserted: ";
+            cin>>val;
+            q1.enqueue(val);
+            break;
+            case 2:
+            q1.dequeue();
+            break;
+            case 3:
+            q1.display();
+            break;
+            default:
+            exit(0);
+        }
+    }
+    return 0;
+}
